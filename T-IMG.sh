@@ -2,7 +2,7 @@
 WHEREAMI="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd && echo)"
 cd $WHEREAMI
 #T-IMG -Terminal Image System.
-#V2.0
+#V3.0
 #(c) 2015 Thomas Leathers
 #
 #
@@ -42,11 +42,42 @@ cd $WHEREAMI
 #e=orange-yellow
 #s=SUPER-white
 #_=blank
-#
+#M=SUPER-red
+#m=SUPER-blue
+#I=SUPER-green
+#i=SUPER-orange
+#u=SUPER-Cyan
+#U=SUPER-purple
+#W=SUPER-yellow
+#w=SUB-red
+#H=SUB-blue
+#h=SUB-green
+#2=SUB-Cyan
+#3=SUB-purple
+#4=SUB-yellow
+#5=MEDHIGH-red
+#6=MEDHIGH-blue
+#7=MEDHIGH-green
+#8=MEDHIGH-Cyan
+#9=MEDHIGH-purple
+#S=MEDHIGH-yellow
+#n=light-purple
+
+
 RED='\033[0;41m'
+URED='\033[0;40m\033[1;31m'
+MRED='\033[0;41m\033[1;37m'
+SRED='\033[0;101m'
 BLUE='\033[0;44m'
+UBLUE='\033[0;40m\033[1;34m'
+MBLUE='\033[0;44m\033[1;37m'
+SBLUE='\033[0;104m'
 GREEN='\033[0;42m'
-ORANGE='\033[0;43m\033[1;31m'  
+UGREEN='\033[0;40m\033[1;32m'
+MGREEN='\033[0;42m\033[1;37m'
+SGREEN='\033[0;102m'
+ORANGE='\033[0;43m\033[1;31m'
+SORANGE='\033[0;103m\033[1;91m'   
 GREY='\033[0;47m\033[1;30m'
 LGREY='\033[0;47m\033[1;30m'
 DGREY='\033[0;40m\033[1;37m'
@@ -67,7 +98,13 @@ BC='\033[0;44m\033[1;36m'
 PINK='\033[0;47m\033[1;31m'
 LC='\033[0;47m\033[1;36m'
 YELLOW='\033[0;43m'
+UYELLOW='\033[0;40m\033[1;33m'
+MYELLOW='\033[0;43m\033[1;37m'
+SYELLOW='\033[0;103m'
 CYAN='\033[0;46m'
+UCYAN='\033[0;40m\033[1;36m'
+MCYAN='\033[0;46m\033[1;37m'
+SCYAN='\033[0;106m'
 OR='\033[0;41m\033[1;33m'
 OY='\033[0;43m\033[1;31m'
 CG='\033[0;46m\033[1;32m'
@@ -76,6 +113,10 @@ YG='\033[0;43m\033[1;32m'
 DG='\033[0;40m\033[1;32m'
 LG='\033[0;47m\033[1;32m'
 PURPLE='\033[0;45m'
+UPURPLE='\033[0;40m\033[1;35m'
+MPURPLE='\033[0;45m\033[1;37m'
+LPURPLE='\033[0;47m\033[1;35m'
+SPURPLE='\033[0;105m'
 # reset command (used at end of script to return to normal teminal colors)
 RESET='\033[0m'
 # file to draw
@@ -83,9 +124,9 @@ RESET='\033[0m'
 #
 #uncomment this line, and point it to the T-IMG image you wish to draw,
 #such as testing to see how a T-IMG image looks:
-#file="$WHEREAMI/sample.TIMG"
+file="$WHEREAMI/palet.TIMG"
 #or uncomment this line to call T-IMG.sh from within another script/terminal:
-file="$1"
+#file="$1"
 # character-pixel strings used:
 echo "$(sed ''1'q;d' $file)"
 CHARMODE=$(sed ''2'q;d' $file)
@@ -206,6 +247,66 @@ until [ "$current" = "!" ]; do
     fi
     if [ "$f" = '_' ]; then
       echo -e -n "${RESET}${DRAW}"
+    fi
+    if [ "$f" = "M" ]; then
+      echo -e -n "${SRED}${DRAW}"
+    fi
+    if [ "$f" = "m" ]; then
+      echo -e -n "${SBLUE}${DRAW}"
+    fi
+    if [ "$f" = "I" ]; then
+      echo -e -n "${SGREEN}${DRAW}"
+    fi
+    if [ "$f" = "i" ]; then
+      echo -e -n "${SORANGE}${MIX}"
+    fi
+    if [ "$f" = "u" ]; then
+      echo -e -n "${SCYAN}${DRAW}"
+    fi
+    if [ "$f" = "U" ]; then
+      echo -e -n "${SPURPLE}${DRAW}"
+    fi
+    if [ "$f" = "W" ]; then
+      echo -e -n "${SYELLOW}${DRAW}"
+    fi
+    if [ "$f" = "w" ]; then
+      echo -e -n "${URED}${MIX2}"
+    fi
+    if [ "$f" = "H" ]; then
+      echo -e -n "${UBLUE}${MIX2}"
+    fi
+    if [ "$f" = "h" ]; then
+      echo -e -n "${UGREEN}${MIX2}"
+    fi
+    if [ "$f" = "2" ]; then
+      echo -e -n "${UCYAN}${MIX2}"
+    fi
+    if [ "$f" = "3" ]; then
+      echo -e -n "${UPURPLE}${MIX2}"
+    fi
+    if [ "$f" = "4" ]; then
+      echo -e -n "${UYELLOW}${MIX2}"
+    fi
+    if [ "$f" = "5" ]; then
+      echo -e -n "${MRED}${MIX2}"
+    fi
+    if [ "$f" = "6" ]; then
+      echo -e -n "${MBLUE}${MIX2}"
+    fi
+    if [ "$f" = "7" ]; then
+      echo -e -n "${MGREEN}${MIX2}"
+    fi
+    if [ "$f" = "8" ]; then
+      echo -e -n "${MCYAN}${MIX2}"
+    fi
+    if [ "$f" = "9" ]; then
+      echo -e -n "${MPURPLE}${MIX2}"
+    fi
+    if [ "$f" = "S" ]; then
+      echo -e -n "${MYELLOW}${MIX2}"
+    fi
+    if [ "$f" = "n" ]; then
+      echo -e -n "${LPURPLE}${MIX}"
     fi
     echo -e -n "${RESET}"
   done
