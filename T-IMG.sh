@@ -2,7 +2,7 @@
 WHEREAMI="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd && echo)"
 cd $WHEREAMI
 #T-IMG -Terminal Image System.
-#V3.0
+#V3.1
 #(c) 2015 Thomas Leathers
 #
 #
@@ -127,8 +127,9 @@ RESET='\033[0m'
 file="$WHEREAMI/palet.TIMG"
 #or uncomment this line to call T-IMG.sh from within another script/terminal:
 #file="$1"
-# character-pixel strings used:
+#comment out this line to prevent T-IMG from printing the title.
 echo "$(sed ''1'q;d' $file)"
+# character-pixel strings used:
 CHARMODE=$(sed ''2'q;d' $file)
 if [ "$CHARMODE" = "2" ]; then
 DRAW="  "
@@ -310,7 +311,7 @@ until [ "$current" = "!" ]; do
     fi
     echo -e -n "${RESET}"
   done
-  CNT1=$(echo "$line+1" | BC_LINE_LENGTH=0 bc)
+  CNT1=$(($line+1))
   line=$CNT1
   if [ "$(sed ''$line'q;d' $file)" = "!" ]; then
     echo -n ""
