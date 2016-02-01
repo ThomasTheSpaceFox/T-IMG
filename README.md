@@ -2,7 +2,7 @@
 Terminal Image System
 (c) 2015 Thomas Leathers
 
-requires bash shell, bc, and sed.
+requires bash shell, grep, and sed.
 
 T-IMG is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by
