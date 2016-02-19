@@ -2,9 +2,9 @@
 Terminal Image System
 (c) 2015 Thomas Leathers
 
-T-IMG.sh requires bash shell, dirname, grep, and sed.
-T-COL.sh requires Bash shell.
-T-COLtest.sh requires dirname.
+T-IMG.sh requires bash shell, dirname, grep, and sed.       
+T-COL.sh requires Bash shell.       
+T-COLtest.sh requires dirname.     
 
 T-IMG is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by
