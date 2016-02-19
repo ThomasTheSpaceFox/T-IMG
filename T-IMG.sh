@@ -2,7 +2,7 @@
 WHEREAMI="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd && echo)"
 cd $WHEREAMI
 #T-IMG -Terminal Image System.
-#V3.1
+#V4.1
 #(c) 2015 Thomas Leathers
 #
 #
@@ -62,28 +62,43 @@ cd $WHEREAMI
 #9=MEDHIGH-purple
 #S=MEDHIGH-yellow
 #n=light-purple
-
+#third translucency color chart
+#t=T-Red
+#o=T-Blue
+#a=T-Green
+#j=T-white
+#T=T-black
+#D=T-Cyan
+#J=T-Purple
+#N=T-Yellow
+#L=Light Black
 
 RED='\033[0;41m'
 URED='\033[0;40m\033[1;31m'
 MRED='\033[0;41m\033[1;37m'
 SRED='\033[0;101m'
+TRED='\033[0;91m'
 BLUE='\033[0;44m'
 UBLUE='\033[0;40m\033[1;34m'
 MBLUE='\033[0;44m\033[1;37m'
 SBLUE='\033[0;104m'
+TBLUE='\033[0;94m'
 GREEN='\033[0;42m'
 UGREEN='\033[0;40m\033[1;32m'
 MGREEN='\033[0;42m\033[1;37m'
 SGREEN='\033[0;102m'
+TGREEN='\033[0;92m'
 ORANGE='\033[0;43m\033[1;31m'
 SORANGE='\033[0;103m\033[1;91m'   
 GREY='\033[0;47m\033[1;30m'
 LGREY='\033[0;47m\033[1;30m'
 DGREY='\033[0;40m\033[1;37m'
 WH='\033[0;47m'
+TWH='\033[0;97m'
 SWH='\033[0;107m'
 BL='\033[0;40m'
+TBL='\033[0;30m'
+LBL='\033[0;100m'
 DY='\033[0;40m\033[1;33m'
 DR='\033[0;40m\033[1;31m'
 BROWN='\033[0;41m\033[1;32m'
@@ -101,10 +116,12 @@ YELLOW='\033[0;43m'
 UYELLOW='\033[0;40m\033[1;33m'
 MYELLOW='\033[0;43m\033[1;37m'
 SYELLOW='\033[0;103m'
+TYELLOW='\033[0;93m'
 CYAN='\033[0;46m'
 UCYAN='\033[0;40m\033[1;36m'
 MCYAN='\033[0;46m\033[1;37m'
 SCYAN='\033[0;106m'
+TCYAN='\033[0;96m'
 OR='\033[0;41m\033[1;33m'
 OY='\033[0;43m\033[1;31m'
 CG='\033[0;46m\033[1;32m'
@@ -117,6 +134,7 @@ UPURPLE='\033[0;40m\033[1;35m'
 MPURPLE='\033[0;45m\033[1;37m'
 LPURPLE='\033[0;47m\033[1;35m'
 SPURPLE='\033[0;105m'
+TPURPLE='\033[0;95m'
 # reset command (used at end of script to return to normal teminal colors)
 RESET='\033[0m'
 # file to draw
@@ -308,6 +326,33 @@ until [ "$current" = "!" ]; do
     fi
     if [ "$f" = "n" ]; then
       echo -e -n "${LPURPLE}${MIX}"
+    fi
+    if [ "$f" = "t" ]; then
+      echo -e -n "${TRED}${MIX}"
+    fi
+    if [ "$f" = "o" ]; then
+      echo -e -n "${TBLUE}${MIX}"
+    fi
+    if [ "$f" = "a" ]; then
+      echo -e -n "${TGREEN}${MIX}"
+    fi
+    if [ "$f" = "T" ]; then
+      echo -e -n "${TBL}${MIX}"
+    fi
+    if [ "$f" = "j" ]; then
+      echo -e -n "${TWH}${MIX}"
+    fi
+    if [ "$f" = "D" ]; then
+      echo -e -n "${TCYAN}${MIX}"
+    fi
+    if [ "$f" = "J" ]; then
+      echo -e -n "${TPURPLE}${MIX}"
+    fi
+    if [ "$f" = "N" ]; then
+      echo -e -n "${TYELLOW}${MIX}"
+    fi
+    if [ "$f" = "L" ]; then
+    echo -e -n "${LBL}${DRAW}"
     fi
     echo -e -n "${RESET}"
   done
