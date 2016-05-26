@@ -2,8 +2,8 @@
 WHEREAMI="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd && echo)"
 cd $WHEREAMI
 #T-IMG -Terminal Image System to Raw Escape code translator.
-#V1.0
-#(c) 2015 Thomas Leathers
+#V1.1
+#(c) 2015-2016 Thomas Leathers
 #
 #
 # first color chart
