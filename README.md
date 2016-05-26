@@ -1,6 +1,6 @@
 # T-IMG
 Terminal Image System
-(c) 2015 Thomas Leathers
+(c) 2015-2016 Thomas Leathers
 
 T-IMG.sh requires bash shell, dirname, grep, and sed.       
 T-COL.sh requires Bash shell.       
