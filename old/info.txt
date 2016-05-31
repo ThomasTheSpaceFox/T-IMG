@@ -1,0 +1,1 @@
+these are old legacy TIMG scripts. written in bash instead of python. they are no longer being developed.
