@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # coding=utf-8
-#(c) 2015 Thomas Leathers
+#(c) 2015-2016 Thomas Leathers
 #T-IMG -Terminal Image System Python Library
 #codeset v4.1
-#T-IMG library v1.0
+#T-IMG library v1.1
 
-#__all__ = ["TIMGfiledraw"]
 
 # first color chart
 #R=red
@@ -74,7 +73,6 @@
 #N=T-Yellow
 #L=Light Black
 
-#import fileinput
 
 
 
@@ -529,4 +527,79 @@ def TIMGmode2expand(charcodedata):
 		LINENO += 1
 	CHARCODEDUMP=(CHARCODEDUMP.replace("-", "\n").replace("+", "-"))
 	return (CHARCODEDUMP)
-	
+
+def coderep(charcodedata, codetorep, codetorepwith):
+	#replaces the specified character code (codetorep) with the spcified 
+	#character (codetorepwith), in the provided character code data 
+	#(charcodedata) , and returns the result.)
+	return(charcodedata.replace(codetorep, codetorepwith))
+
+def getpoint(charcodedata, liney, colx):
+	#
+	#x and y start at 1 i.e. 1,1 is line 1 column 1.
+	LINENO=1
+	LINENOB=1
+	LINEBOULDER=('')
+	CHARCODEDUMP=('')
+	referflag1=0
+	#arndata = (charcodedata.replace("-", "+"))
+	arndata = (charcodedata.replace("\n", "+"))
+	for culine in (arndata):
+		
+		if culine!=("+"):
+			LINEBOULDER=(LINEBOULDER + culine)
+		elif culine==("+"):
+			LINEBOULDER=(LINEBOULDER + "+")
+			referflag1=1
+		if (LINENO > 0 and culine!=('!') and referflag1==1):
+			#print curline
+			LINEBLOCK=('')
+			COLNO=1
+			for CHARCODE in LINEBOULDER:
+				if (COLNO==colx and LINENOB==liney):
+					CHARCODEIS=CHARCODE
+				COLNO += 1
+			CHARCODEDUMP=(CHARCODEDUMP + LINEBLOCK)
+		if referflag1==1:
+			LINENOB += 1
+			LINEBOULDER=('')
+		referflag1=0
+		LINENO += 1
+	#CHARCODEDUMP=(CHARCODEDUMP.replace("+", "\n"))
+	return (CHARCODEIS)
+
+def reppoint(charcodedata, codetouse, liney, colx):
+	#
+	#x and y start at 1 i.e. 1,1 is line 1 column 1.
+	LINENO=1
+	LINENOB=1
+	LINEBOULDER=('')
+	CHARCODEDUMP=('')
+	referflag1=0
+	#arndata = (charcodedata.replace("-", "+"))
+	arndata = (charcodedata.replace("\n", "+"))
+	for culine in (arndata):
+		
+		if culine!=("+"):
+			LINEBOULDER=(LINEBOULDER + culine)
+		elif culine==("+"):
+			LINEBOULDER=(LINEBOULDER + "+")
+			referflag1=1
+		if (LINENO > 0 and culine!=('!') and referflag1==1):
+			#print curline
+			LINEBLOCK=('')
+			COLNO=1
+			for CHARCODE in LINEBOULDER:
+				if (COLNO==colx and LINENOB==liney):
+					LINEBLOCK=(LINEBLOCK + codetouse)
+				elif (COLNO!=colx or LINENOB!=liney):
+					LINEBLOCK=(LINEBLOCK + CHARCODE)
+				COLNO += 1
+			CHARCODEDUMP=(CHARCODEDUMP + LINEBLOCK)
+		if referflag1==1:
+			LINENOB += 1
+			LINEBOULDER=('')
+		referflag1=0
+		LINENO += 1
+	CHARCODEDUMP=(CHARCODEDUMP.replace("+", "\n"))
+	return (CHARCODEDUMP)
