@@ -5,6 +5,7 @@
 #codeset v4.1
 #T-IMG library v1.1
 
+#__all__ = ["TIMGfiledraw"]
 
 # first color chart
 #R=red
@@ -73,6 +74,7 @@
 #N=T-Yellow
 #L=Light Black
 
+#import fileinput
 
 
 
@@ -535,13 +537,15 @@ def coderep(charcodedata, codetorep, codetorepwith):
 	return(charcodedata.replace(codetorep, codetorepwith))
 
 def getpoint(charcodedata, liney, colx):
-	#
+	#get character code from line: "liney" and column: "colx" 
+	#in provided timg character code data: "charcodedata"
 	#x and y start at 1 i.e. 1,1 is line 1 column 1.
 	LINENO=1
 	LINENOB=1
 	LINEBOULDER=('')
 	CHARCODEDUMP=('')
 	referflag1=0
+	CHARCODEIS=("")
 	#arndata = (charcodedata.replace("-", "+"))
 	arndata = (charcodedata.replace("\n", "+"))
 	for culine in (arndata):
@@ -549,7 +553,7 @@ def getpoint(charcodedata, liney, colx):
 		if culine!=("+"):
 			LINEBOULDER=(LINEBOULDER + culine)
 		elif culine==("+"):
-			LINEBOULDER=(LINEBOULDER + "+")
+			LINEBOULDER=(LINEBOULDER)
 			referflag1=1
 		if (LINENO > 0 and culine!=('!') and referflag1==1):
 			#print curline
@@ -559,7 +563,7 @@ def getpoint(charcodedata, liney, colx):
 				if (COLNO==colx and LINENOB==liney):
 					CHARCODEIS=CHARCODE
 				COLNO += 1
-			CHARCODEDUMP=(CHARCODEDUMP + LINEBLOCK)
+			CHARCODEDUMP=(CHARCODEDUMP + LINEBLOCK  + "+")
 		if referflag1==1:
 			LINENOB += 1
 			LINEBOULDER=('')
@@ -583,7 +587,7 @@ def reppoint(charcodedata, codetouse, liney, colx):
 		if culine!=("+"):
 			LINEBOULDER=(LINEBOULDER + culine)
 		elif culine==("+"):
-			LINEBOULDER=(LINEBOULDER + "+")
+			LINEBOULDER=(LINEBOULDER)
 			referflag1=1
 		if (LINENO > 0 and culine!=('!') and referflag1==1):
 			#print curline
@@ -595,7 +599,7 @@ def reppoint(charcodedata, codetouse, liney, colx):
 				elif (COLNO!=colx or LINENOB!=liney):
 					LINEBLOCK=(LINEBLOCK + CHARCODE)
 				COLNO += 1
-			CHARCODEDUMP=(CHARCODEDUMP + LINEBLOCK)
+			CHARCODEDUMP=(CHARCODEDUMP + LINEBLOCK + "+")
 		if referflag1==1:
 			LINENOB += 1
 			LINEBOULDER=('')
