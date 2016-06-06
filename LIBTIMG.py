@@ -3,7 +3,7 @@
 #(c) 2015-2016 Thomas Leathers
 #T-IMG -Terminal Image System Python Library
 #codeset v4.1
-#T-IMG library v1.1
+#T-IMG library v1.2
 
 #__all__ = ["TIMGfiledraw"]
 
@@ -75,7 +75,7 @@
 #L=Light Black
 
 #import fileinput
-
+import math
 
 
 RED=('\033[0;41m')
@@ -571,6 +571,98 @@ def getpoint(charcodedata, liney, colx):
 		LINENO += 1
 	#CHARCODEDUMP=(CHARCODEDUMP.replace("+", "\n"))
 	return (CHARCODEIS)
+
+def hlinedraw(timgdata, chartouse, Y1, X1, X2):
+	if X1>X2:
+		XSTA=X2
+		XEND=X1
+	if X2>X1:
+		XSTA=X1
+		XEND=X2
+	VIXEND=(XEND + 1)
+	Xcnt=1
+	while Xcnt!=VIXEND:
+		if (Xcnt>=XSTA and Xcnt<=XEND):
+			timgdata=(reppoint(timgdata, chartouse, Y1, Xcnt))
+		Xcnt += 1
+	return(timgdata)
+
+def vlinedraw(timgdata, chartouse, Y1, Y2, X1):
+	if Y1>Y2:
+		YSTA=Y2
+		YEND=Y1
+	if Y2>Y1:
+		YSTA=Y1
+		YEND=Y2
+	VIXEND=(YEND + 1)
+	Ycnt=1
+	while Ycnt!=VIXEND:
+		if (Ycnt>=YSTA and Ycnt<=YEND):
+			timgdata=(reppoint(timgdata, chartouse, Ycnt, X1))
+		Ycnt += 1
+	return(timgdata)
+
+
+
+def linedraw(timgdata, codetouse, Y1, X1, Y2, X2):
+	if X1==X2:
+		timgdata = vlinedraw(timgdata, codetouse, Y1, Y2, X1)
+	elif Y1==Y2:
+		timgdata = hlinedraw(timgdata, codetouse, Y1, X1, X2)
+	elif (Y1!=Y2 and X1!=X2):
+		if X1>X2:
+			YSTA=Y2
+			YEND=Y1
+			XSTA=X2
+			XEND=X1
+		if X2>X1:
+			YSTA=Y1
+			YEND=Y2
+			XSTA=X1
+			XEND=X2
+		Ydiff=(YSTA - YEND)
+		Xdiff=(XSTA - XEND)
+		#print (str(Ydiff) + "/" + str(Xdiff))
+		slope=(float(Ydiff) / Xdiff)
+		#print (slope)
+		curX=XSTA
+		curY=YSTA
+		curYfl=YSTA
+		BARGEX=(XEND + 1)
+		slopetank=0
+		while (curX!=BARGEX and curYfl!=YEND and slope>0):
+			slopeblob=math.floor(slopetank)
+			if slopetank>=1:
+				curY += float(slopetank)
+				slopetank=0
+			if slopetank<=-1:
+				curY -= float(slopetank)
+				slopetank=0
+			curYfl=math.floor(curY)
+			curXfl=math.floor(curX)
+			timgdata=(reppoint(timgdata, codetouse, curYfl, curX))
+			slopetank=(slopetank + float(slope))
+			#print("calculating")
+			curX +=1
+		while (curX!=BARGEX and curYfl!=YEND and slope<0):
+			slopeblob=math.floor(slopetank)
+			if slopetank<=1:
+				curY += float(slopetank)
+				slopetank=0
+			if slopetank>=-1:
+				curY -= float(slopetank)
+				slopetank=0
+			curYfl=math.floor(curY)
+			curXfl=math.floor(curX)
+			timgdata=(reppoint(timgdata, codetouse, curYfl, curX))
+			slopetank=(slopetank + float(slope))
+			#print("calculating")
+			curX +=1
+	return(timgdata)
+
+
+
+
 
 def reppoint(charcodedata, codetouse, liney, colx):
 	#
