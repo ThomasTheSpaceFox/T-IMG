@@ -3,7 +3,7 @@
 #(c) 2015-2016 Thomas Leathers
 #T-IMG -Terminal Image System Python Library
 #codeset v4.1
-#T-IMG library v1.2
+#T-IMG library v1.3
 
 #__all__ = ["TIMGfiledraw"]
 
@@ -699,3 +699,55 @@ def reppoint(charcodedata, codetouse, liney, colx):
 		LINENO += 1
 	CHARCODEDUMP=(CHARCODEDUMP.replace("+", "\n"))
 	return (CHARCODEDUMP)
+
+#overlay timg data over another set of timg data
+def overlay(basetimgdata, datatooverlay, lineY, colX):
+	
+	#
+	#x and y start at 1 i.e. 1,1 is line 1 column 1.
+	LINENO=1
+	LINENOB=1
+	COLNO=1
+	LINEBOULDER2=('')
+	CHARCODEDUMP=('')
+	referflag1=0
+	#arndata = (charcodedata.replace("-", "+"))
+	arndata = (datatooverlay.replace("\n", "+"))
+	arndata = (arndata.replace(" ", ""))
+	for culine in (arndata):
+		
+		if culine!=("+"):
+			LINEBOULDER2=(LINEBOULDER2 + culine)
+		elif culine==("+"):
+			LINEBOULDER2=(LINEBOULDER2)
+			referflag1=1
+		if (LINENO > 0 and culine!=('!') and referflag1==1):
+			#print curline
+			LINEBLOCK=('')
+			COLNO=1
+			for CHARCODE2 in LINEBOULDER2:
+				
+				referline=(lineY + LINENOB - 1)
+				refercol=(colX + COLNO - 1)
+				if CHARCODE2!="_":
+					basetimgdata=(reppoint(basetimgdata, CHARCODE2, referline, refercol))
+				COLNO +=1
+		if referflag1==1:
+			LINENOB += 1
+			LINEBOULDER2=('')
+		referflag1=0
+		LINENO += 1
+	return (basetimgdata)
+
+#generate a plain timg image at the specified size using the specified code.
+
+def imggen(colcode, sizeY, sizeX):
+	seccode=(colcode * sizeX)
+	#print seccode
+	datbatch=""
+	lstcnt=1
+	sizeYB=(sizeY + 1)
+	while lstcnt!=sizeYB:
+		datbatch=(datbatch + seccode + "\n")
+		lstcnt += 1
+	return datbatch
